@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>European Reclaim</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #141210;
+    --surface:  #1c1917;
+    --raised:   #232018;
+    --border:   #2e2b26;
+    --border2:  #3d3930;
+    --text:     #d6cfc5;
+    --muted:    #6b6560;
+    --dim:      #4a4540;
+
+    --far-left:     #8a0000;
+    --left:         #c01a1a;
+    --centre-left:  #c96a52;
+    --centre:       #6e6b67;
+    --centre-right: #5a8faa;
+    --right:        #2e6899;
+    --far-right:    #132d52;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    padding: 1.8rem 4rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  nav a {
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 2.5rem;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--text); }
+
+  /* LAYOUT */
+  .wrap { padding: 3.5rem 4rem; }
+  .wrap + .wrap { border-top: 1px solid var(--border); }
+
+  .section-label {
+    font-size: 0.63rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  /* ARTICLES */
+  .articles {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .art {
+    background: var(--bg);
+    padding: 2rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .art:hover { background: var(--surface); }
+  .art.big { grid-row: span 2; }
+
+  .art-cat {
+    font-size: 0.63rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.7rem;
+  }
+
+  .art h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 0.7rem;
+  }
+  .art.big h3 {
+    font-size: 1.8rem;
+    line-height: 1.15;
+  }
+
+  .art p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+
+  .art-date {
+    font-size: 0.68rem;
+    color: var(--dim);
+    margin-top: 1.4rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .proj {
+    background: var(--surface);
+    padding: 2rem;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .proj:hover { background: var(--raised); }
+
+  .proj-idx {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.75rem;
+    font-style: italic;
+    color: var(--dim);
+    margin-bottom: 1rem;
+  }
+
+  .proj h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.08rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 0.65rem;
+  }
+
+  .proj p { font-size: 0.81rem; color: var(--muted); line-height: 1.7; }
+
+  .proj-status {
+    font-size: 0.63rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-top: 1.4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* COUNTRIES */
+  .spectrum {
+    display: flex;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .sp-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .sp-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+  .countries-table { width: 100%; border-collapse: collapse; }
+
+  .countries-table th {
+    font-size: 0.63rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim);
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border2);
+    font-weight: 400;
+  }
+
+  .countries-table td {
+    padding: 0.58rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.83rem;
+    vertical-align: middle;
+    color: var(--text);
+  }
+
+  .countries-table tr:last-child td { border-bottom: none; }
+  .countries-table tr:hover td { background: var(--surface); }
+
+  .cname { font-weight: 400; letter-spacing: 0.01em; }
+
+  .badge {
+    display: inline-block;
+    padding: 0.16rem 0.52rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    color: rgba(214, 207, 197, 0.88);
+  }
+
+  .ue-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+  }
+
+  /* NEWSLETTER */
+  .newsletter-wrap {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 3.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .nl-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  .nl-text p { font-size: 0.82rem; color: var(--muted); margin-top: 0.4rem; }
+
+  .nl-form { display: flex; }
+
+  .nl-form input {
+    padding: 0.75rem 1.1rem;
+    border: 1px solid var(--border2);
+    border-right: none;
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.83rem;
+    color: var(--text);
+    width: 270px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .nl-form input::placeholder { color: var(--dim); }
+  .nl-form input:focus { border-color: var(--muted); }
+
+  .nl-form button {
+    padding: 0.75rem 1.3rem;
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+  }
+  .nl-form button:hover { opacity: 0.7; }
+
+  #nl-msg { font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; min-height: 1rem; letter-spacing: 0.04em; }
+
+  /* FOOTER */
+  footer {
+    padding: 1.4rem 4rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer p { font-size: 0.68rem; color: var(--dim); letter-spacing: 0.08em; }
+
+  @media (max-width: 900px) {
+    header, .wrap, footer, .newsletter-wrap { padding-left: 1.8rem; padding-right: 1.8rem; }
+    .articles { grid-template-columns: 1fr; }
+    .art.big { grid-row: span 1; }
+    .art.big h3 { font-size: 1.35rem; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    nav { display: none; }
+  }
+  @media (max-width: 600px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .nl-form { flex-direction: column; }
+    .nl-form input { width: 100%; border-right: 1px solid var(--border2); border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">European Reclaim</div>
+  <nav>
+    <a href="#articles">Articles</a>
+    <a href="#projects">Projects</a>
+    <a href="#countries">Countries</a>
+    <a href="#newsletter">Newsletter</a>
+  </nav>
+</header>
+
+<!-- ARTICLES -->
+<div class="wrap" id="articles">
+  <div class="section-label">Latest Articles</div>
+  <div class="articles">
+    <div class="art big">
+      <div class="art-cat">Analysis</div>
+      <h3>The Institutional Turning Point: Is Europe Moving Toward a Federal Model?</h3>
+      <p>As discussions around a deep revision of the Treaties intensify in Brussels, several member states have staked out divergent positions on the future of European decision-making architecture. The question of qualified majority voting in the Council is back at the centre of debate.</p>
+      <div class="art-date">Feb 12, 2025</div>
+    </div>
+    <div class="art">
+      <div class="art-cat">Economy</div>
+      <h3>Stability Pact Reform: Early Assessments</h3>
+      <p>New fiscal rules take effect. What room for manœuvre remains for member states?</p>
+      <div class="art-date">Feb 8, 2025</div>
+    </div>
+    <div class="art">
+      <div class="art-cat">Defence</div>
+      <h3>NATO & Europe: Reshaping Strategic Alliances</h3>
+      <p>The war in Ukraine is redrawing continental security priorities for the next decade.</p>
+      <div class="art-date">Feb 5, 2025</div>
+    </div>
+    <div class="art">
+      <div class="art-cat">Rule of Law</div>
+      <h3>The Commission vs Budapest and Warsaw</h3>
+      <p>The budget conditionality mechanism tests its political and legal limits.</p>
+      <div class="art-date">Feb 3, 2025</div>
+    </div>
+    <div class="art">
+      <div class="art-cat">Enlargement</div>
+      <h3>Western Balkans: Revised Accession Timeline</h3>
+      <p>Brussels publishes a new progress report for Balkans candidate countries.</p>
+      <div class="art-date">Feb 1, 2025</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="wrap" id="projects">
+  <div class="section-label">Reform Projects</div>
+  <div class="projects-grid">
+    <div class="proj">
+      <div class="proj-idx">01 · Legislative</div>
+      <h3>European Green Deal 2.0</h3>
+      <p>Ambitious revision of the EU climate framework with binding sector targets and a solidarity mechanism for carbon-heavy regions in transition.</p>
+      <div class="proj-status">Public consultation open</div>
+    </div>
+    <div class="proj">
+      <div class="proj-idx">02 · Proposed</div>
+      <h3>Capital Markets Union — Phase III</h3>
+      <p>Deeper financial integration to mobilise €500 billion in additional funding for SMEs and European tech start-ups by 2028.</p>
+      <div class="proj-status">Pre-legislative stage</div>
+    </div>
+    <div class="proj">
+      <div class="proj-idx">03 · Adopted</div>
+      <h3>European Data Space</h3>
+      <p>Harmonised legal framework for the free flow and secure sharing of industrial, health, and agricultural data within the single market.</p>
+      <div class="proj-status">National transposition underway</div>
+    </div>
+    <div class="proj">
+      <div class="proj-idx">04 · In Discussion</div>
+      <h3>European Minimum Wage — Revision</h3>
+      <p>Updated wage convergence mechanisms to reduce income disparities between member states and strengthen social cohesion.</p>
+      <div class="proj-status">Trilogue in progress</div>
+    </div>
+    <div class="proj">
+      <div class="proj-idx">05 · New</div>
+      <h3>European Defence Fund — Industry Pillar</h3>
+      <p>Enhanced cooperation among defence industries with an €8 billion envelope for priority cross-border strategic capability projects.</p>
+      <div class="proj-status">Impact assessment phase</div>
+    </div>
+    <div class="proj">
+      <div class="proj-idx">06 · Reform</div>
+      <h3>Council Voting Reform</h3>
+      <p>Move to qualified majority voting in taxation, foreign policy and fundamental rights to accelerate EU decision-making.</p>
+      <div class="proj-status">Blocked — unanimity required</div>
+    </div>
+  </div>
+</div>
+
+<!-- COUNTRIES -->
+<div class="wrap" id="countries">
+  <div class="section-label">45 European Countries — Dominant Political Orientation</div>
+  <div class="spectrum">
+    <div class="sp-item"><span class="sp-dot" style="background:var(--far-left)"></span>Far Left</div>
+    <div class="sp-item"><span class="sp-dot" style="background:var(--left)"></span>Left</div>
+    <div class="sp-item"><span class="sp-dot" style="background:var(--centre-left)"></span>Centre-Left</div>
+    <div class="sp-item"><span class="sp-dot" style="background:var(--centre)"></span>Centre</div>
+    <div class="sp-item"><span class="sp-dot" style="background:var(--centre-right)"></span>Centre-Right</div>
+    <div class="sp-item"><span class="sp-dot" style="background:var(--right)"></span>Right</div>
+    <div class="sp-item"><span class="sp-dot" style="background:var(--far-right)"></span>Far Right</div>
+  </div>
+  <table class="countries-table">
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th>Parliament</th>
+        <th>Government</th>
+        <th>Community</th>
+        <th>EU</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-wrap" id="newsletter">
+  <div class="nl-text">
+    <h2>Stay informed.<br>Join the reclaim.</h2>
+    <p>Weekly analysis, legislative updates and European political panorama — straight to your inbox.</p>
+  </div>
+  <div>
+    <div class="nl-form">
+      <input type="email" id="nl-email" placeholder="your@email.com">
+      <button onclick="subscribe()">Subscribe</button>
+    </div>
+    <div id="nl-msg"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="logo" style="font-size:0.95rem;">European Reclaim</div>
+  <p>© 2025 EuropeanReclaim</p>
+</footer>
+
+<script>
+const SPECTRUM = {
+  'far-left':    'var(--far-left)',
+  'left':        'var(--left)',
+  'centre-left': 'var(--centre-left)',
+  'centre':      'var(--centre)',
+  'centre-right':'var(--centre-right)',
+  'right':       'var(--right)',
+  'far-right':   'var(--far-right)',
+};
+const LABELS = {
+  'far-left':'Far Left','left':'Left','centre-left':'Centre-Left',
+  'centre':'Centre','centre-right':'Centre-Right','right':'Right','far-right':'Far Right'
+};
+function badge(k) {
+  return `<span class="badge" style="background:${SPECTRUM[k]}">${LABELS[k]}</span>`;
+}
+
+const DATA = [
+  {flag:'🇦🇱',name:'Albania',           ue:false,parl:'left',        gouv:'left',        comm:'centre-left'},
+  {flag:'🇦🇩',name:'Andorra',           ue:false,parl:'centre',      gouv:'centre',      comm:'centre'},
+  {flag:'🇦🇹',name:'Austria',           ue:true, parl:'far-right',   gouv:'far-right',   comm:'centre-right'},
+  {flag:'🇧🇾',name:'Belarus',           ue:false,parl:'far-right',   gouv:'far-right',   comm:'far-right'},
+  {flag:'🇧🇪',name:'Belgium',           ue:true, parl:'centre-right',gouv:'centre-right',comm:'centre'},
+  {flag:'🇧🇦',name:'Bosnia-Herzegovina',ue:false,parl:'right',       gouv:'right',       comm:'right'},
+  {flag:'🇧🇬',name:'Bulgaria',          ue:true, parl:'centre-right',gouv:'centre-right',comm:'centre-right'},
+  {flag:'🇭🇷',name:'Croatia',           ue:true, parl:'right',       gouv:'right',       comm:'right'},
+  {flag:'🇨🇾',name:'Cyprus',            ue:true, parl:'centre',      gouv:'centre',      comm:'centre'},
+  {flag:'🇨🇿',name:'Czechia',           ue:true, parl:'centre-right',gouv:'centre',      comm:'centre'},
+  {flag:'🇩🇰',name:'Denmark',           ue:true, parl:'centre-left', gouv:'centre-left', comm:'centre-left'},
+  {flag:'🇪🇪',name:'Estonia',           ue:true, parl:'centre-right',gouv:'centre-right',comm:'centre-right'},
+  {flag:'🇫🇮',name:'Finland',           ue:true, parl:'right',       gouv:'right',       comm:'right'},
+  {flag:'🇫🇷',name:'France',            ue:true, parl:'centre',      gouv:'centre',      comm:'centre'},
+  {flag:'🇩🇪',name:'Germany',           ue:true, parl:'centre-right',gouv:'centre-right',comm:'centre-right'},
+  {flag:'🇬🇷',name:'Greece',            ue:true, parl:'centre-right',gouv:'centre-right',comm:'centre-right'},
+  {flag:'🇭🇺',name:'Hungary',           ue:true, parl:'far-right',   gouv:'far-right',   comm:'far-right'},
+  {flag:'🇮🇸',name:'Iceland',           ue:false,parl:'centre-left', gouv:'centre-left', comm:'centre'},
+  {flag:'🇮🇪',name:'Ireland',           ue:true, parl:'centre',      gouv:'centre',      comm:'centre'},
+  {flag:'🇮🇹',name:'Italy',             ue:true, parl:'far-right',   gouv:'far-right',   comm:'right'},
+  {flag:'🇽🇰',name:'Kosovo',            ue:false,parl:'centre-left', gouv:'centre-left', comm:'centre-left'},
+  {flag:'🇱🇻',name:'Latvia',            ue:true, parl:'centre-right',gouv:'centre-right',comm:'centre-right'},
+  {flag:'🇱🇮',name:'Liechtenstein',     ue:false,parl:'right',       gouv:'right',       comm:'right'},
+  {flag:'🇱🇹',name:'Lithuania',         ue:true, parl:'centre-right',gouv:'centre-right',comm:'centre-right'},
+  {flag:'🇱🇺',name:'Luxembourg',        ue:true, parl:'centre',      gouv:'centre',      comm:'centre'},
+  {flag:'🇲🇹',name:'Malta',             ue:true, parl:'centre-left', gouv:'centre-left', comm:'centre-left'},
+  {flag:'🇲🇩',name:'Moldova',           ue:false,parl:'centre',      gouv:'centre',      comm:'centre'},
+  {flag:'🇲🇨',name:'Monaco',            ue:false,parl:'centre',      gouv:'centre',      comm:'centre'},
+  {flag:'🇲🇪',name:'Montenegro',        ue:false,parl:'centre',      gouv:'centre',      comm:'centre'},
+  {flag:'🇳🇱',name:'Netherlands',       ue:true, parl:'far-right',   gouv:'right',       comm:'centre-right'},
+  {flag:'🇲🇰',name:'North Macedonia',   ue:false,parl:'centre-left', gouv:'centre-left', comm:'centre-left'},
+  {flag:'🇳🇴',name:'Norway',            ue:false,parl:'right',       gouv:'right',       comm:'centre-right'},
+  {flag:'🇵🇱',name:'Poland',            ue:true, parl:'centre',      gouv:'centre',      comm:'centre'},
+  {flag:'🇵🇹',name:'Portugal',          ue:true, parl:'centre-right',gouv:'centre-right',comm:'centre-right'},
+  {flag:'🇷🇴',name:'Romania',           ue:true, parl:'centre-left', gouv:'centre-left', comm:'centre-left'},
+  {flag:'🇷🇺',name:'Russia',            ue:false,parl:'far-right',   gouv:'far-right',   comm:'far-right'},
+  {flag:'🇸🇲',name:'San Marino',        ue:false,parl:'centre-left', gouv:'centre-left', comm:'centre-left'},
+  {flag:'🇷🇸',name:'Serbia',            ue:false,parl:'right',       gouv:'right',       comm:'right'},
+  {flag:'🇸🇰',name:'Slovakia',          ue:true, parl:'left',        gouv:'left',        comm:'left'},
+  {flag:'🇸🇮',name:'Slovenia',          ue:true, parl:'centre-left', gouv:'centre-left', comm:'centre-left'},
+  {flag:'🇪🇸',name:'Spain',             ue:true, parl:'left',        gouv:'left',        comm:'centre-left'},
+  {flag:'🇸🇪',name:'Sweden',            ue:true, parl:'right',       gouv:'right',       comm:'centre-right'},
+  {flag:'🇨🇭',name:'Switzerland',       ue:false,parl:'centre',      gouv:'centre',      comm:'centre'},
+  {flag:'🇺🇦',name:'Ukraine',           ue:false,parl:'centre',      gouv:'centre',      comm:'centre'},
+  {flag:'🇬🇧',name:'United Kingdom',    ue:false,parl:'centre-left', gouv:'centre-left', comm:'centre-left'},
+];
+
+document.getElementById('tbody').innerHTML = DATA.map(c => `
+  <tr>
+    <td>${c.flag} <span class="cname">${c.name}</span></td>
+    <td>${badge(c.parl)}</td>
+    <td>${badge(c.gouv)}</td>
+    <td>${badge(c.comm)}</td>
+    <td><span class="ue-tag">${c.ue ? 'EU' : '—'}</span></td>
+  </tr>
+`).join('');
+
+function subscribe() {
+  const el = document.getElementById('nl-email');
+  const msg = document.getElementById('nl-msg');
+  const v = el.value.trim();
+  if (!v || !v.includes('@')) { msg.textContent = 'Please enter a valid email address.'; return; }
+  msg.textContent = '✓  Subscribed — ' + v;
+  el.value = '';
+}
+</script>
+</body>
+</html>
