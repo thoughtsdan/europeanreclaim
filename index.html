@@ -9,7 +9,7 @@
   :root {
     --bg:       #141210;
     --surface:  #1c1917;
-    --raised:   #232018;
+    --raised:   #1f1d19;
     --border:   #2e2b26;
     --border2:  #3d3930;
     --text:     #d6cfc5;
@@ -35,7 +35,7 @@
     line-height: 1.6;
   }
 
-  /* HEADER */
+  /* ── HEADER ── */
   header {
     padding: 1.8rem 4rem;
     border-bottom: 1px solid var(--border);
@@ -43,7 +43,6 @@
     justify-content: space-between;
     align-items: baseline;
   }
-
   .logo {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.45rem;
@@ -52,7 +51,6 @@
     text-transform: uppercase;
     color: var(--text);
   }
-
   nav a {
     font-size: 0.68rem;
     letter-spacing: 0.14em;
@@ -64,10 +62,9 @@
   }
   nav a:hover { color: var(--text); }
 
-  /* LAYOUT */
+  /* ── LAYOUT ── */
   .wrap { padding: 3.5rem 4rem; }
   .wrap + .wrap { border-top: 1px solid var(--border); }
-
   .section-label {
     font-size: 0.63rem;
     letter-spacing: 0.2em;
@@ -76,54 +73,106 @@
     margin-bottom: 2.5rem;
   }
 
-  /* ARTICLES */
-  .articles {
+  /* ── ARTICLES GRID: left big + right stacked ── */
+  .articles-layout {
     display: grid;
-    grid-template-columns: 1.6fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 1px;
     background: var(--border);
   }
 
-  .art {
+  .art-main {
     background: var(--bg);
-    padding: 2rem;
+    padding: 2.8rem;
     cursor: pointer;
     transition: background 0.15s;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 420px;
   }
-  .art:hover { background: var(--surface); }
-  .art.big { grid-row: span 2; }
+  .art-main:hover { background: var(--surface); }
+
+  .art-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .art-side {
+    background: var(--bg);
+    padding: 2rem 2.2rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .art-side:hover { background: var(--surface); }
 
   .art-cat {
-    font-size: 0.63rem;
-    letter-spacing: 0.16em;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.8rem;
   }
 
-  .art h3 {
+  .art-main h3 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
+    font-size: 2.2rem;
     font-weight: 600;
-    line-height: 1.25;
+    line-height: 1.1;
     color: var(--text);
-    margin-bottom: 0.7rem;
-  }
-  .art.big h3 {
-    font-size: 1.8rem;
-    line-height: 1.15;
+    margin-bottom: 1rem;
   }
 
-  .art p { font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+  .art-side h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+
+  .art-main p { font-size: 0.85rem; color: var(--muted); line-height: 1.75; max-width: 520px; }
+  .art-side p  { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
 
   .art-date {
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     color: var(--dim);
     margin-top: 1.4rem;
     letter-spacing: 0.06em;
   }
 
-  /* PROJECTS */
+  /* hidden articles */
+  .art-hidden { display: none; }
+
+  /* ── SEE MORE BUTTON ── */
+  .see-more-wrap {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .btn-more {
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--border2);
+    padding: 0.6rem 1.4rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-more:hover { color: var(--text); border-color: var(--muted); }
+
+  /* ── PROJECTS ── */
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -132,12 +181,15 @@
   }
 
   .proj {
-    background: var(--surface);
-    padding: 2rem;
+    background: var(--bg);
+    padding: 2rem 2.2rem;
     cursor: pointer;
     transition: background 0.15s;
+    border-left: none;
   }
-  .proj:hover { background: var(--raised); }
+  .proj:hover { background: var(--surface); }
+
+  .proj-hidden { display: none; }
 
   .proj-idx {
     font-family: 'Cormorant Garamond', serif;
@@ -146,7 +198,6 @@
     color: var(--dim);
     margin-bottom: 1rem;
   }
-
   .proj h3 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.08rem;
@@ -155,11 +206,9 @@
     color: var(--text);
     margin-bottom: 0.65rem;
   }
-
   .proj p { font-size: 0.81rem; color: var(--muted); line-height: 1.7; }
-
   .proj-status {
-    font-size: 0.63rem;
+    font-size: 0.62rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--dim);
@@ -168,7 +217,7 @@
     border-top: 1px solid var(--border);
   }
 
-  /* COUNTRIES */
+  /* ── COUNTRIES ── */
   .spectrum {
     display: flex;
     gap: 1.6rem;
@@ -186,7 +235,6 @@
   .sp-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 
   .countries-table { width: 100%; border-collapse: collapse; }
-
   .countries-table th {
     font-size: 0.63rem;
     letter-spacing: 0.16em;
@@ -197,7 +245,6 @@
     border-bottom: 1px solid var(--border2);
     font-weight: 400;
   }
-
   .countries-table td {
     padding: 0.58rem 0.8rem;
     border-bottom: 1px solid var(--border);
@@ -205,27 +252,19 @@
     vertical-align: middle;
     color: var(--text);
   }
-
   .countries-table tr:last-child td { border-bottom: none; }
   .countries-table tr:hover td { background: var(--surface); }
-
-  .cname { font-weight: 400; letter-spacing: 0.01em; }
-
+  .cname { font-weight: 400; }
   .badge {
     display: inline-block;
     padding: 0.16rem 0.52rem;
     font-size: 0.66rem;
     letter-spacing: 0.04em;
-    color: rgba(214, 207, 197, 0.88);
+    color: rgba(214,207,197,0.88);
   }
+  .ue-tag { font-size: 0.65rem; letter-spacing: 0.08em; color: var(--dim); }
 
-  .ue-tag {
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    color: var(--dim);
-  }
-
-  /* NEWSLETTER */
+  /* ── NEWSLETTER ── */
   .newsletter-wrap {
     background: var(--surface);
     border-top: 1px solid var(--border);
@@ -236,7 +275,6 @@
     gap: 3rem;
     flex-wrap: wrap;
   }
-
   .nl-text h2 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.75rem;
@@ -245,9 +283,7 @@
     color: var(--text);
   }
   .nl-text p { font-size: 0.82rem; color: var(--muted); margin-top: 0.4rem; }
-
   .nl-form { display: flex; }
-
   .nl-form input {
     padding: 0.75rem 1.1rem;
     border: 1px solid var(--border2);
@@ -262,7 +298,6 @@
   }
   .nl-form input::placeholder { color: var(--dim); }
   .nl-form input:focus { border-color: var(--muted); }
-
   .nl-form button {
     padding: 0.75rem 1.3rem;
     background: var(--text);
@@ -277,10 +312,9 @@
     white-space: nowrap;
   }
   .nl-form button:hover { opacity: 0.7; }
-
   #nl-msg { font-size: 0.7rem; color: var(--muted); margin-top: 0.5rem; min-height: 1rem; letter-spacing: 0.04em; }
 
-  /* FOOTER */
+  /* ── FOOTER ── */
   footer {
     padding: 1.4rem 4rem;
     border-top: 1px solid var(--border);
@@ -292,9 +326,9 @@
 
   @media (max-width: 900px) {
     header, .wrap, footer, .newsletter-wrap { padding-left: 1.8rem; padding-right: 1.8rem; }
-    .articles { grid-template-columns: 1fr; }
-    .art.big { grid-row: span 1; }
-    .art.big h3 { font-size: 1.35rem; }
+    .articles-layout { grid-template-columns: 1fr; }
+    .art-main { min-height: auto; }
+    .art-main h3 { font-size: 1.5rem; }
     .projects-grid { grid-template-columns: 1fr 1fr; }
     nav { display: none; }
   }
@@ -317,83 +351,33 @@
   </nav>
 </header>
 
-<!-- ARTICLES -->
+<!-- ═══════════════════════════════════════════════
+     ARTICLES
+     To add a new article, copy one object and paste
+     it at the TOP of the ARTICLES array below.
+     The 3 most recent appear by default; the rest
+     are revealed by "See more articles".
+════════════════════════════════════════════════ -->
 <div class="wrap" id="articles">
   <div class="section-label">Latest Articles</div>
-  <div class="articles">
-    <div class="art big">
-      <div class="art-cat">Analysis</div>
-      <h3>The Institutional Turning Point: Is Europe Moving Toward a Federal Model?</h3>
-      <p>As discussions around a deep revision of the Treaties intensify in Brussels, several member states have staked out divergent positions on the future of European decision-making architecture. The question of qualified majority voting in the Council is back at the centre of debate.</p>
-      <div class="art-date">Feb 12, 2025</div>
-    </div>
-    <div class="art">
-      <div class="art-cat">Economy</div>
-      <h3>Stability Pact Reform: Early Assessments</h3>
-      <p>New fiscal rules take effect. What room for manœuvre remains for member states?</p>
-      <div class="art-date">Feb 8, 2025</div>
-    </div>
-    <div class="art">
-      <div class="art-cat">Defence</div>
-      <h3>NATO & Europe: Reshaping Strategic Alliances</h3>
-      <p>The war in Ukraine is redrawing continental security priorities for the next decade.</p>
-      <div class="art-date">Feb 5, 2025</div>
-    </div>
-    <div class="art">
-      <div class="art-cat">Rule of Law</div>
-      <h3>The Commission vs Budapest and Warsaw</h3>
-      <p>The budget conditionality mechanism tests its political and legal limits.</p>
-      <div class="art-date">Feb 3, 2025</div>
-    </div>
-    <div class="art">
-      <div class="art-cat">Enlargement</div>
-      <h3>Western Balkans: Revised Accession Timeline</h3>
-      <p>Brussels publishes a new progress report for Balkans candidate countries.</p>
-      <div class="art-date">Feb 1, 2025</div>
-    </div>
+  <div id="articles-container"></div>
+  <div class="see-more-wrap">
+    <button class="btn-more" id="btn-articles" onclick="toggleArticles()">See more articles</button>
   </div>
 </div>
 
-<!-- PROJECTS -->
+<!-- ═══════════════════════════════════════════════
+     PROJECTS
+     To add a new project, copy one object and paste
+     it at the TOP of the PROJECTS array below.
+     The first 3 appear by default; the rest are
+     revealed by "See more projects".
+════════════════════════════════════════════════ -->
 <div class="wrap" id="projects">
   <div class="section-label">Reform Projects</div>
-  <div class="projects-grid">
-    <div class="proj">
-      <div class="proj-idx">01 · Legislative</div>
-      <h3>European Green Deal 2.0</h3>
-      <p>Ambitious revision of the EU climate framework with binding sector targets and a solidarity mechanism for carbon-heavy regions in transition.</p>
-      <div class="proj-status">Public consultation open</div>
-    </div>
-    <div class="proj">
-      <div class="proj-idx">02 · Proposed</div>
-      <h3>Capital Markets Union — Phase III</h3>
-      <p>Deeper financial integration to mobilise €500 billion in additional funding for SMEs and European tech start-ups by 2028.</p>
-      <div class="proj-status">Pre-legislative stage</div>
-    </div>
-    <div class="proj">
-      <div class="proj-idx">03 · Adopted</div>
-      <h3>European Data Space</h3>
-      <p>Harmonised legal framework for the free flow and secure sharing of industrial, health, and agricultural data within the single market.</p>
-      <div class="proj-status">National transposition underway</div>
-    </div>
-    <div class="proj">
-      <div class="proj-idx">04 · In Discussion</div>
-      <h3>European Minimum Wage — Revision</h3>
-      <p>Updated wage convergence mechanisms to reduce income disparities between member states and strengthen social cohesion.</p>
-      <div class="proj-status">Trilogue in progress</div>
-    </div>
-    <div class="proj">
-      <div class="proj-idx">05 · New</div>
-      <h3>European Defence Fund — Industry Pillar</h3>
-      <p>Enhanced cooperation among defence industries with an €8 billion envelope for priority cross-border strategic capability projects.</p>
-      <div class="proj-status">Impact assessment phase</div>
-    </div>
-    <div class="proj">
-      <div class="proj-idx">06 · Reform</div>
-      <h3>Council Voting Reform</h3>
-      <p>Move to qualified majority voting in taxation, foreign policy and fundamental rights to accelerate EU decision-making.</p>
-      <div class="proj-status">Blocked — unanimity required</div>
-    </div>
+  <div id="projects-container"></div>
+  <div class="see-more-wrap">
+    <button class="btn-more" id="btn-projects" onclick="toggleProjects()">See more projects</button>
   </div>
 </div>
 
@@ -412,11 +396,7 @@
   <table class="countries-table">
     <thead>
       <tr>
-        <th>Country</th>
-        <th>Parliament</th>
-        <th>Government</th>
-        <th>Community</th>
-        <th>EU</th>
+        <th>Country</th><th>Parliament</th><th>Government</th><th>Community</th><th>EU</th>
       </tr>
     </thead>
     <tbody id="tbody"></tbody>
@@ -444,14 +424,216 @@
 </footer>
 
 <script>
+/* ══════════════════════════════════════════════════
+   ▶ ADD ARTICLES HERE
+   Most recent first. The first 3 are shown by default.
+   Fields: cat, title, excerpt, date
+══════════════════════════════════════════════════ */
+const ARTICLES = [
+  {
+    cat: 'Analysis',
+    title: 'The Institutional Turning Point: Is Europe Moving Toward a Federal Model?',
+    excerpt: 'As discussions around a deep revision of the Treaties intensify in Brussels, several member states have staked out divergent positions on the future of European decision-making architecture. The question of qualified majority voting in the Council is back at the centre of debate.',
+    date: 'Feb 12, 2025'
+  },
+  {
+    cat: 'Economy',
+    title: 'Stability Pact Reform: Early Assessments',
+    excerpt: 'New fiscal rules take effect. What room for manœuvre remains for member states navigating elevated debt and sluggish growth?',
+    date: 'Feb 8, 2025'
+  },
+  {
+    cat: 'Defence',
+    title: 'NATO & Europe: Reshaping Strategic Alliances',
+    excerpt: 'The war in Ukraine is redrawing continental security priorities for the next decade.',
+    date: 'Feb 5, 2025'
+  },
+  {
+    cat: 'Rule of Law',
+    title: 'The Commission vs Budapest and Warsaw',
+    excerpt: 'The budget conditionality mechanism tests its political and legal limits against two recalcitrant capitals.',
+    date: 'Feb 3, 2025'
+  },
+  {
+    cat: 'Enlargement',
+    title: 'Western Balkans: Revised Accession Timeline',
+    excerpt: 'Brussels publishes a new progress report for Balkans candidate countries, signalling renewed momentum.',
+    date: 'Feb 1, 2025'
+  },
+  {
+    cat: 'Trade',
+    title: 'EU–Mercosur: The Deal That Would Not Die',
+    excerpt: 'After years of stalled negotiations, the trade agreement inches closer to ratification despite persistent resistance from French farmers.',
+    date: 'Jan 28, 2025'
+  },
+  {
+    cat: 'Energy',
+    title: 'Energy Union at a Crossroads',
+    excerpt: 'With Russian gas largely cut off, the EU turns to new suppliers and storage strategies ahead of the next winter.',
+    date: 'Jan 22, 2025'
+  },
+];
+
+/* ══════════════════════════════════════════════════
+   ▶ ADD PROJECTS HERE
+   Most recent / important first. First 3 shown by default.
+   Fields: label, title, body, status
+══════════════════════════════════════════════════ */
+const PROJECTS = [
+  {
+    label: 'Legislative',
+    title: 'European Green Deal 2.0',
+    body: 'Ambitious revision of the EU climate framework with binding sector targets and a solidarity mechanism for carbon-heavy regions in transition.',
+    status: 'Public consultation open'
+  },
+  {
+    label: 'Proposed',
+    title: 'Capital Markets Union — Phase III',
+    body: 'Deeper financial integration to mobilise €500 billion in additional funding for SMEs and European tech start-ups by 2028.',
+    status: 'Pre-legislative stage'
+  },
+  {
+    label: 'Adopted',
+    title: 'European Data Space',
+    body: 'Harmonised legal framework for the free flow and secure sharing of industrial, health, and agricultural data within the single market.',
+    status: 'National transposition underway'
+  },
+  {
+    label: 'In Discussion',
+    title: 'European Minimum Wage — Revision',
+    body: 'Updated wage convergence mechanisms to reduce income disparities between member states and strengthen social cohesion.',
+    status: 'Trilogue in progress'
+  },
+  {
+    label: 'New',
+    title: 'European Defence Fund — Industry Pillar',
+    body: 'Enhanced cooperation among defence industries with an €8 billion envelope for priority cross-border strategic capability projects.',
+    status: 'Impact assessment phase'
+  },
+  {
+    label: 'Reform',
+    title: 'Council Voting Reform',
+    body: 'Move to qualified majority voting in taxation, foreign policy and fundamental rights to accelerate EU decision-making.',
+    status: 'Blocked — unanimity required'
+  },
+];
+
+/* ══════════════════════════════════════════════════
+   RENDERING — no need to edit below
+══════════════════════════════════════════════════ */
+
+let articlesExpanded = false;
+let projectsExpanded = false;
+
+function renderArticles() {
+  const container = document.getElementById('articles-container');
+  const btn = document.getElementById('btn-articles');
+
+  if (ARTICLES.length === 0) { container.innerHTML = ''; btn.style.display = 'none'; return; }
+
+  const featured = ARTICLES[0];
+  const side = ARTICLES.slice(1, 3);
+  const more = ARTICLES.slice(3);
+
+  let html = `<div class="articles-layout">
+    <div class="art-main">
+      <div class="art-cat">${featured.cat}</div>
+      <h3>${featured.title}</h3>
+      <p>${featured.excerpt}</p>
+      <div class="art-date">${featured.date}</div>
+    </div>
+    <div class="art-stack">`;
+
+  side.forEach(a => {
+    html += `<div class="art-side">
+      <div>
+        <div class="art-cat">${a.cat}</div>
+        <h3>${a.title}</h3>
+        <p>${a.excerpt}</p>
+      </div>
+      <div class="art-date">${a.date}</div>
+    </div>`;
+  });
+
+  html += `</div></div>`; // close stack + layout
+
+  // older articles
+  if (more.length > 0) {
+    html += `<div id="articles-more" style="display:${articlesExpanded ? 'block' : 'none'}; margin-top:1px; background:var(--border); display:${articlesExpanded ? 'grid' : 'none'}; grid-template-columns:1fr 1fr 1fr; gap:1px;">`;
+    more.forEach(a => {
+      html += `<div class="art-side" style="background:var(--bg);">
+        <div>
+          <div class="art-cat">${a.cat}</div>
+          <h3>${a.title}</h3>
+          <p>${a.excerpt}</p>
+        </div>
+        <div class="art-date">${a.date}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  container.innerHTML = html;
+  btn.style.display = more.length === 0 ? 'none' : 'inline-block';
+  btn.textContent = articlesExpanded ? 'Show less' : 'See more articles';
+}
+
+function toggleArticles() {
+  articlesExpanded = !articlesExpanded;
+  const more = document.getElementById('articles-more');
+  if (more) {
+    more.style.display = articlesExpanded ? 'grid' : 'none';
+  }
+  document.getElementById('btn-articles').textContent = articlesExpanded ? 'Show less' : 'See more articles';
+}
+
+function renderProjects() {
+  const container = document.getElementById('projects-container');
+  const btn = document.getElementById('btn-projects');
+
+  const visible = PROJECTS.slice(0, 3);
+  const hidden  = PROJECTS.slice(3);
+
+  let html = `<div class="projects-grid">`;
+  visible.forEach((p, i) => {
+    html += `<div class="proj">
+      <div class="proj-idx">${String(i+1).padStart(2,'0')} · ${p.label}</div>
+      <h3>${p.title}</h3>
+      <p>${p.body}</p>
+      <div class="proj-status">${p.status}</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  if (hidden.length > 0) {
+    html += `<div id="projects-more" style="display:${projectsExpanded ? 'grid' : 'none'}; margin-top:1px; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border);">`;
+    hidden.forEach((p, i) => {
+      html += `<div class="proj">
+        <div class="proj-idx">${String(visible.length+i+1).padStart(2,'0')} · ${p.label}</div>
+        <h3>${p.title}</h3>
+        <p>${p.body}</p>
+        <div class="proj-status">${p.status}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  container.innerHTML = html;
+  btn.style.display = hidden.length === 0 ? 'none' : 'inline-block';
+  btn.textContent = projectsExpanded ? 'Show less' : 'See more projects';
+}
+
+function toggleProjects() {
+  projectsExpanded = !projectsExpanded;
+  const more = document.getElementById('projects-more');
+  if (more) more.style.display = projectsExpanded ? 'grid' : 'none';
+  document.getElementById('btn-projects').textContent = projectsExpanded ? 'Show less' : 'See more projects';
+}
+
+/* ── COUNTRIES ── */
 const SPECTRUM = {
-  'far-left':    'var(--far-left)',
-  'left':        'var(--left)',
-  'centre-left': 'var(--centre-left)',
-  'centre':      'var(--centre)',
-  'centre-right':'var(--centre-right)',
-  'right':       'var(--right)',
-  'far-right':   'var(--far-right)',
+  'far-left':'var(--far-left)','left':'var(--left)','centre-left':'var(--centre-left)',
+  'centre':'var(--centre)','centre-right':'var(--centre-right)','right':'var(--right)','far-right':'var(--far-right)'
 };
 const LABELS = {
   'far-left':'Far Left','left':'Left','centre-left':'Centre-Left',
@@ -461,7 +643,7 @@ function badge(k) {
   return `<span class="badge" style="background:${SPECTRUM[k]}">${LABELS[k]}</span>`;
 }
 
-const DATA = [
+const COUNTRIES = [
   {flag:'🇦🇱',name:'Albania',           ue:false,parl:'left',        gouv:'left',        comm:'centre-left'},
   {flag:'🇦🇩',name:'Andorra',           ue:false,parl:'centre',      gouv:'centre',      comm:'centre'},
   {flag:'🇦🇹',name:'Austria',           ue:true, parl:'far-right',   gouv:'far-right',   comm:'centre-right'},
@@ -509,7 +691,7 @@ const DATA = [
   {flag:'🇬🇧',name:'United Kingdom',    ue:false,parl:'centre-left', gouv:'centre-left', comm:'centre-left'},
 ];
 
-document.getElementById('tbody').innerHTML = DATA.map(c => `
+document.getElementById('tbody').innerHTML = COUNTRIES.map(c => `
   <tr>
     <td>${c.flag} <span class="cname">${c.name}</span></td>
     <td>${badge(c.parl)}</td>
@@ -519,6 +701,7 @@ document.getElementById('tbody').innerHTML = DATA.map(c => `
   </tr>
 `).join('');
 
+/* ── NEWSLETTER ── */
 function subscribe() {
   const el = document.getElementById('nl-email');
   const msg = document.getElementById('nl-msg');
@@ -527,6 +710,10 @@ function subscribe() {
   msg.textContent = '✓  Subscribed — ' + v;
   el.value = '';
 }
+
+/* ── INIT ── */
+renderArticles();
+renderProjects();
 </script>
 </body>
 </html>
